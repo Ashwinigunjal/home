@@ -10,8 +10,28 @@
   	<description></description>
   	<servlet-class>com.home.controller.loginservlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>SetControl</servlet-name>
+  	<display-name>SetControl</display-name>
+  	<description></description>
+  	<servlet-class>com.home.controller.SetControl</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>GetStatus</servlet-name>
+  	<display-name>GetStatus</display-name>
+  	<description></description>
+  	<servlet-class>com.home.controller.GetStatus</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>loginservlet</servlet-name>
   	<url-pattern>/loginservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SetControl</servlet-name>
+  	<url-pattern>/setcontrol</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>GetStatus</servlet-name>
+  	<url-pattern>/getstatus</url-pattern>
   </servlet-mapping>
 </web-app>

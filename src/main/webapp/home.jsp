@@ -54,13 +54,16 @@
 <body>
 
 <%
-		String mobile=(String)session.getAttribute("mobile");
-		String pass=(String)session.getAttribute("pass");
-		
-		if(mobile == null && pass == null){
-			response.sendRedirect("index.jsp");
-		}else{
-		
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0");
+response.setDateHeader("Expires", -1);
+
+if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == null){
+	
+	response.sendRedirect("index.jsp");
+}
+
 %>
 
 	<nav class="navbar navbar-inverse">
@@ -264,6 +267,8 @@ $("#ctrl_power").on('change', function() {
 
 	var device_name = $( "#device_name" ).val();
 	var ctrl_power = $("#ctrl_power").val();
+	var json =JSON.stringify({deviceName:device_name, control:ctrl_power});
+	console.log(json);
 
 	if (device_name == "") {
 		$( "#alert_dev_id_danger" ).fadeTo(500, 1);
@@ -276,11 +281,12 @@ $("#ctrl_power").on('change', function() {
 	}else {
 
 		$.ajax({
-			url : "set_control.php",
+			url : "setcontrol",
 			type: 'POST',
 			dataType : 'JSON',
-			data : {device_name:device_name, control:ctrl_power},
+			data :json ,
 			success: function(res){
+				
 
 				if (res.st == 1) {
 					$("#alert_dev_id_danger").hide();
@@ -305,17 +311,18 @@ $("#ctrl_power").on('change', function() {
 		 //ajax loop function..
 		 function ajax_loop(){
 		 	var device_name = $( "#device_name" ).val();
-
+		 	var json =JSON.stringify({deviceName:device_name});
+		 	
 		 	if (device_name == "") {
 		 		$( "#alert_dev_id_danger" ).fadeTo(500, 1);
 		 		$( "#alert_dev_id_danger" ).html("<strong>Select device before proceeding</strong>");
 		 		$( "#alert_dev_id_danger" ).fadeTo(4000, 600).hide(600);
 		 	}else {
 		 		$.ajax({
-		 			url : "get_status.php",
+		 			url : "getstatus",
 		 			type: 'POST',
 		 			dataType : 'JSON',
-		 			data : {device_name:device_name},
+		 			data : json,
 		 			success: function(res){
 		 				console.log(res);
 						// if (res.st == 1) {
@@ -339,10 +346,7 @@ $("#ctrl_power").on('change', function() {
 		//end of ajax function..
 	});
 
-<%
 
-		}
-%>
 
 </script>
 

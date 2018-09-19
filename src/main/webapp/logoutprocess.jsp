@@ -9,8 +9,16 @@
 <body>
 
 <%
+
+
 session.setAttribute("mobile", null);
 session.setAttribute("pass", null);
+
+
+/* response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0");
+response.setDateHeader("Expires", -1); */
 session.invalidate();
 response.sendRedirect("index.jsp");
 

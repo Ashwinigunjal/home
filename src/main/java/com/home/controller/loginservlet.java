@@ -41,10 +41,10 @@ public class loginservlet extends HttpServlet {
 				int data =AdminDao.checkLogin(admin);
 				if(data == 1) {
 					 HttpSession session=request.getSession();  
-//					if(session =null) {
+					if(session !=null) {
 				    	session.setAttribute("mobile",mobile );
 				    	session.setAttribute("pass",password);
-//					}
+					}
 				    	response.sendRedirect("home.jsp");
 					
 				}else {

@@ -7,6 +7,15 @@ public class HomeDevice {
 	private String control;
 	private String status;
 	private String deviceType;
+	private String st;
+	
+	
+	public String getSt() {
+		return st;
+	}
+	public void setSt(String st) {
+		this.st = st;
+	}
 	public int getId() {
 		return id;
 	}
