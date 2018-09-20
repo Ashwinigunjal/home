@@ -116,10 +116,15 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 			</div>						</div>
 						
 
-						<div id="dev_select">
+							<div id="dev_select">
 							<label> <i class="fa fa-lightbulb-o fa-lg" style="color: #FFA000;"></i> Device:</label><br>
 							<select id="device_name" name="device_name" style="width: 20em;" required >
-								<option value="">-- Select Device --</option><option value="light1">Light1</option><option value="light2">Light2</option><option value="fan1">Fan1</option><option value="light3">Light3</option><option value="dev_2">Dev_2</option><option value="ravi">Ravi</option><option value="L2">L2</option><option value="L2">L2</option><option value="laml">Laml</option><option value="Lamp1">Lamp1</option><option value="Lamp1">Lamp1</option></select>							<br><br>
+							<option value="">-- Select Device --</option>
+							<!-- jquery -->
+							
+							</select>
+							<br><br>
+							
 							<label><i class="fa fa-power-off fa-lg" style="color: #E64A19;"></i> Power:</label><br>
 							<select id="ctrl_power" style="width: 20em;">
 								<option value="">-- Select Power --</option>
@@ -307,43 +312,35 @@ $("#ctrl_power").on('change', function() {
 	}
 });
 
+/*  get list */
 
-		 //ajax loop function..
-		 function ajax_loop(){
-		 	var device_name = $( "#device_name" ).val();
-		 	var json =JSON.stringify({deviceName:device_name});
-		 	
-		 	if (device_name == "") {
-		 		$( "#alert_dev_id_danger" ).fadeTo(500, 1);
-		 		$( "#alert_dev_id_danger" ).html("<strong>Select device before proceeding</strong>");
-		 		$( "#alert_dev_id_danger" ).fadeTo(4000, 600).hide(600);
-		 	}else {
-		 		$.ajax({
-		 			url : "getstatus",
-		 			type: 'POST',
-		 			dataType : 'JSON',
-		 			data : json,
-		 			success: function(res){
-		 				console.log(res);
-						// if (res.st == 1) {
-						// 	$("#alert_dev_id_danger").hide();
-						// 	$( "#alert_success" ).fadeTo(500, 1);
-						// 	$( "#alert_success" ).html("<strong>"+ device_name.toUpperCase() +"</strong> is Successfully set control <strong>" + ctrl_power.toUpperCase() + "</strong>");
-						// 	$("#alert_success").fadeTo(4000, 600).hide(600);
-						// }	else if (res.st == 2) {
-						// 	$( "#alert_dev_id_danger" ).fadeTo(500, 1);
-						// 	$( "#alert_dev_id_danger" ).html("<strong>Technical Error:</strong> Invalid Device selected");
-						// 	$("#alert_dev_id_danger").fadeTo(4000, 600).hide(600);
-						// }else if (res.st == 3) {
-						// 	$( "#alert_dev_id_danger" ).fadeTo(500, 1);
-						// 	$( "#alert_dev_id_danger" ).html("<strong>"+ device_name.toUpperCase() +"</strong> is Already set control <strong>" + ctrl_power.toUpperCase() + "</strong>");
-						// 	$("#alert_dev_id_danger").fadeTo(4000, 600).hide(600);
-						// }				
-					},
-				});
-		 	}
-		 }
-		//end of ajax function..
+	$("#device_name").click(function(){
+		var list="";
+		
+		$.get("getlist",function(data ,status){
+			 var $select = $("#device_name");
+             $select.find("option").remove(); 
+			$.each( JSON.parse(data), function(key,value){
+				console.log(key + " : "+ value);
+				
+				 list = "<option  value="+ value+">"+value+"</option>";		
+				 $("#device_name").append(list);
+				 list="";
+			}); 
+			
+			
+						
+		});
+		
+		
+	});
+	
+
+
+	
+/* end list  */
+	
+	
 	});
 
 

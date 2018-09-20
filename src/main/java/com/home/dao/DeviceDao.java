@@ -86,6 +86,42 @@ public static List<HomeDevice> getcontrol() throws SQLException {
 	return ll;
 }
 
+//*****************Get List*****************************************
+public static List<String> getlist() throws SQLException {
+	
+	Connection conn =null;
+	PreparedStatement st =null;
+	ResultSet rs = null;
+	int result=0;
+	HomeDevice device  = new HomeDevice() ;
+	List<String> ll=new ArrayList<String>();
+	
+	try {
+		conn=Config.config();
+		st=conn.prepareStatement("select distinct device_name from home_device  where device_type=1");  
+		
+		rs=st.executeQuery(); 
+		
+		while(rs.next()) {
+			
+			ll.add(rs.getString("device_name"));
+		}
+		
+					
+	}catch(Exception e) {
+		e.printStackTrace();
+		
+	}finally {
+		
+		if(conn!=null) {
+			st.close();
+			rs.close();
+			conn.close();								
+		}
+	}
+	return ll;
+}
+
 
 
 	
