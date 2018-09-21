@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,27 +24,20 @@ public class GetStatus extends HttpServlet {
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 List<HomeDevice> res_data = new LinkedList<HomeDevice>();
-		 HashMap<String,String> res=new HashMap<String,String>();  
-
-		BufferedReader br = new BufferedReader(new  InputStreamReader(request.getInputStream()));
-	    String json = "";
-	    if(br != null){
-	        json = br.readLine();
-	    }
+		 List<HashMap<String,String>> res_data = new LinkedList<HashMap<String,String>>();
+		 HashMap<String,String> res=new HashMap<String,String>();	
 	    ObjectMapper mapper = new ObjectMapper();
-	    HomeDevice device = mapper.readValue(json, HomeDevice.class);
-	    System.out.println(json);
-		
+	  
 		response.setContentType("application/json");
 		try {
-			res_data=DeviceDao.getcontrol();
+			res_data=DeviceDao.getstatus();
 			System.out.println(res_data);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
+		mapper.writeValue(response.getOutputStream(),res_data);
 	}
 		
 		

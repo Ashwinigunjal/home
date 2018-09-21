@@ -28,6 +28,14 @@
   	<description></description>
   	<servlet-class>com.home.controller.GetList</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>InsertDevice</servlet-name>
+  	<display-name>InsertDevice</display-name>
+  	<description></description>
+  	<servlet-class>com.home.controller.InsertDevice</servlet-class>
+  </servlet>
+  
+ 
   <servlet-mapping>
   	<servlet-name>loginservlet</servlet-name>
   	<url-pattern>/loginservlet</url-pattern>
@@ -44,4 +52,10 @@
   	<servlet-name>GetList</servlet-name>
   	<url-pattern>/getlist</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>InsertDevice</servlet-name>
+  	<url-pattern>/insertdevice</url-pattern>
+  </servlet-mapping>
+ 
+ 
 </web-app>

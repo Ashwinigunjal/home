@@ -13,7 +13,7 @@ public class Config {
 		  Class.forName("com.mysql.jdbc.Driver");
 			
 			 conn = DriverManager.getConnection(  
-			"jdbc:mysql://localhost:3306/home","root","root");
+			"jdbc:mysql://localhost:3306/home","root","password");
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

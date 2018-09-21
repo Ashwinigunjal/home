@@ -102,7 +102,7 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 					<div class="panel-body">
 					<br>
 						<div id="dev_add" style="display: none;">
-							<form method="post" >
+							<form method="post" action="insertdevice" >
 								<div class="form-group ">
 									<input type="text" class="form-control" name="dev_name"  placeholder="Enter Device Name" autocomplete="off" required>
 								</div>
@@ -119,7 +119,7 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 							<div id="dev_select">
 							<label> <i class="fa fa-lightbulb-o fa-lg" style="color: #FFA000;"></i> Device:</label><br>
 							<select id="device_name" name="device_name" style="width: 20em;" required >
-							<option value="">-- Select Device --</option>
+							<option id="device_name1" value="">-- Select Device --</option>
 							<!-- jquery -->
 							
 							</select>
@@ -149,62 +149,20 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 					<div class="panel-body">
 
 						<div id="status_group">
-							<div class="row">
+						<div id="status_data"></div>
+						<!-- 	<div class="row">
 									<div class="col-md-5 text-center">
 										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Light1: </label>
 									</div>
 									<div class="col-md-5"><span class="label label-success" style="float: right; font-size: 1.2em;">On</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Light2: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-success" style="float: right; font-size: 1.2em;">On</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Fan1: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Light3: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Dev_2: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Ravi: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;L2: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;L2: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Laml: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Lamp1: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br><div class="row">
-									<div class="col-md-5 text-center">
-										<label style="float: left;"><i class="fa fa-cogs fa-lg" style="color: #795548;"></i> &nbsp;Lamp1: </label>
-									</div>
-									<div class="col-md-5"><span class="label label-warning" style="float: right; font-size: 1.2em;"">Off</span></div>
-								</div><br>
+								</div><br> -->
+								
+							
+								
+								
+								
+								
+						
 						<hr>
 						<div class="row">
 							<div class="col-md-6">
@@ -248,9 +206,11 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 <script>
 	$(document).ready(function(){
 
+		
 		var interval;
-		interval = setInterval(function(){
-			$("#status_group").load(location.href + " #status_group")}, 5000);
+		device_status();
+		// interval = setInterval(function(){
+		// 	$("#status_group").load(location.href + " #status_group")}, 5000);
 
 			$('[data-toggle="tooltip"]').tooltip();
 
@@ -258,6 +218,9 @@ if(	session.getAttribute("mobile")  == null && session.getAttribute("pass") == n
 			$("#dev_add").show();
 			$("#dev_select").hide();
 		});
+
+		setInterval(device_status,7000);
+		
 
 		$("#cancel").click(function(){
 			$("#dev_add").hide();
@@ -315,7 +278,7 @@ $("#ctrl_power").on('change', function() {
 /*  get list */
 
 	$("#device_name").click(function(){
-		var list="";
+		var list=null;
 		
 		$.get("getlist",function(data ,status){
 			 var $select = $("#device_name");
@@ -323,23 +286,50 @@ $("#ctrl_power").on('change', function() {
 			$.each( JSON.parse(data), function(key,value){
 				console.log(key + " : "+ value);
 				
-				 list = "<option  value="+ value+">"+value+"</option>";		
+				 list = "<option  value='"+ value+"'>"+value+"</option>";		
 				 $("#device_name").append(list);
-				 list="";
-			}); 
-			
-			
+				
+			}); 						
 						
 		});
 		
 		
 	});
-	
-
-
-	
+		
 /* end list  */
-	
+/*  get stauts */
+ 
+ 
+ 
+function device_status(){
+		var data =null;
+		
+		$.ajax({
+			url : "getstatus",
+			type: 'POST',
+			success: function(res){
+			 
+	           // var data;
+	           $("#status_data").empty();
+				$.each(res,function(key,value){
+					
+				 console.log(value["device_name"] + " : "+ value["status"] + " : "+value["device_type"] );
+				  data ="<div  class='row status_data1'><div  class='col-md-5 text-center'><label style='float: left;'><i class='fa fa-cogs fa-lg' style='color: #795548;'></i>&nbsp;"+value["device_name"]+":</label></div><div class='col-md-5'><span class='label label-success' style='float: right; font-size: 1.2em;'>"+value["status"] +"</span></div></div><br>"
+				
+				 $("#status_data").append(data);
+				 
+				});
+				
+			
+				
+			},		
+		});
+		data="";
+		
+
+}
+/*end  */
+
 	
 	});
 
