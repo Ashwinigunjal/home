@@ -99,15 +99,15 @@ public static List getstatus() throws SQLException {
 	
 	try {
 		conn=Config.config();
-		st=conn.prepareStatement("select Max(id), device_name,status,device_type  from home_device where device_type=1 GROUP by device_name ");  
+		st=conn.prepareStatement("select * from home_device where id in (select Max(id) from home_device GROUP by device_name ); ");  
 		
 		rs=st.executeQuery(); 
 		
 		while(rs.next()) {
 			HashMap<String,String> res=new HashMap<String,String>();
-			res.put("device_name", rs.getString(2));
-			res.put("device_type", rs.getString(4));
-			res.put("status", rs.getString(3));
+			res.put("device_name", rs.getString("device_name"));//2
+			res.put("device_type", rs.getString("device_type"));//4
+			res.put("status", rs.getString("status"));//3
 			System.out.println("*********************");
 			System.out.println(rs.getString(2)+" : "+ rs.getString(4) +" : "+ rs.getString(3));
 			System.out.println("*********************");

@@ -16,7 +16,7 @@ public class HomeDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		return new Class[] { HomeConfig.class };
 	}
 
-	@Override
+	@Override	
 	protected String[] getServletMappings() {
 		// TODO Auto-generated method stub
 		return new String[] { "/" };
